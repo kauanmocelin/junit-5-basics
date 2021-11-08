@@ -1,19 +1,19 @@
 package dev.kauanmocelin;
 
 public class MathUtils {
-    public Double sum(double parameterA, double parameterB) {
+    public int sum(int parameterA, int parameterB) {
         return parameterA + parameterB;
     }
 
-    public Double subtract(double parameterA, double parameterB) {
+    public int subtract(int parameterA, int parameterB) {
         return parameterA - parameterB;
     }
 
-    public Double multiply(double parameterA, double parameterB) {
+    public int multiply(int parameterA, int parameterB) {
         return parameterA * parameterB;
     }
 
-    public Double divide(double parameterA, double parameterB) {
+    public int divide(int parameterA, int parameterB) {
         return parameterA / parameterB;
     }
 
