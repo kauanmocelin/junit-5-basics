@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.assertj.core.api.Fail.fail;
 
 class MathUtilsTest {
@@ -49,5 +50,12 @@ class MathUtilsTest {
     @Disabled
     void testDisabled() {
         fail("This test should be disabled");
+    }
+
+    @Test
+    void testAssumptions() {
+        boolean isServerUp = false;
+        assumeThat(isServerUp).isTrue();
+        // test will be run only if server is up
     }
 }
