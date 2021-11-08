@@ -20,4 +20,9 @@ class MathUtilsTest {
         assertThatThrownBy(() -> mathUtils.divide(1, 0))
                 .isInstanceOf(ArithmeticException.class);
     }
+
+    @Test
+    void shouldReturnRightCircleAreaWhenSuccessful() {
+        assertThat(mathUtils.calculateCircleArea(10)).isEqualTo(314.1592653589793);
+    }
 }
