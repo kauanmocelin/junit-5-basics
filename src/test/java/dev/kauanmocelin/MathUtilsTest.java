@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.assertj.core.api.Fail.fail;
+import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 class MathUtilsTest {
 
@@ -44,6 +45,18 @@ class MathUtilsTest {
     @DisplayName("should return right circle area when successful")
     void shouldReturnRightCircleAreaWhenSuccessful() {
         assertThat(mathUtils.calculateCircleArea(10)).isEqualTo(314.1592653589793);
+    }
+
+    @Test
+    @DisplayName("should multiply two numbers with successful")
+    void shouldMultiplyTwoNumbersWithSuccessful() {
+        assertSoftly(
+                softAssertions -> {
+                    softAssertions.assertThat(mathUtils.multiply(2, 2)).isEqualTo(4);
+                    softAssertions.assertThat(mathUtils.multiply(2, 0)).isEqualTo(0);
+                    softAssertions.assertThat(mathUtils.multiply(2, -1)).isEqualTo(-2);
+                }
+        );
     }
 
     @Test
