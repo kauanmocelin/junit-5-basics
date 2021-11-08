@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Fail.fail;
 
 class MathUtilsTest {
 
@@ -42,5 +43,11 @@ class MathUtilsTest {
     @DisplayName("should return right circle area when successful")
     void shouldReturnRightCircleAreaWhenSuccessful() {
         assertThat(mathUtils.calculateCircleArea(10)).isEqualTo(314.1592653589793);
+    }
+
+    @Test
+    @Disabled
+    void testDisabled() {
+        fail("This test should be disabled");
     }
 }
