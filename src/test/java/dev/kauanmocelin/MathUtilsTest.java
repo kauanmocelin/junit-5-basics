@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MathUtilsTest {
 
     @Test
-    void shoudlReturnSumFromTwoNumbersWithSuccessful() {
+    void shouldReturnSumFromTwoNumbersWithSuccessful() {
         final MathUtils mathUtils = new MathUtils();
 
         final Double result = mathUtils.sum(2.0, 3.0);
