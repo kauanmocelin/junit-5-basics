@@ -11,7 +11,9 @@ import static org.assertj.core.api.SoftAssertions.assertSoftly;
 @DisplayName("When running MathUtils")
 class MathUtilsTest {
 
-    MathUtils mathUtils;
+    private MathUtils mathUtils;
+    private TestInfo testInfo;
+    private TestReporter testReporter;
 
     @BeforeAll
     static void beforeAllInit() {
@@ -19,8 +21,11 @@ class MathUtilsTest {
     }
 
     @BeforeEach
-    void init() {
+    void init(TestInfo testInfo, TestReporter testReporter) {
+        this.testInfo = testInfo;
+        this.testReporter = testReporter;
         mathUtils = new MathUtils();
+        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
     }
 
     @AfterEach
@@ -67,6 +72,8 @@ class MathUtilsTest {
     @Tag("Math")
     @DisplayName("should multiply two numbers when successful")
     void shouldMultiplyTwoNumbersWithSuccessful() {
+//        System.out.println("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
+//        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
         assertSoftly(
                 softAssertions -> {
                     softAssertions.assertThat(mathUtils.multiply(2, 2)).isEqualTo(4);
@@ -83,6 +90,7 @@ class MathUtilsTest {
     }
 
     @Test
+    @Disabled
     void testAssumptions() {
         boolean isServerUp = false;
         assumeThat(isServerUp).isTrue();
