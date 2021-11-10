@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.assertj.core.api.Fail.fail;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
+@DisplayName("When running MathUtils")
 class MathUtilsTest {
 
     MathUtils mathUtils;
@@ -27,11 +28,22 @@ class MathUtilsTest {
         System.out.println("Cleaning up...");
     }
 
-    @Test
-    @DisplayName("Should sum two numbers with successful")
-    void shouldSumTwoNumbersWithSuccessful() {
-        final int result = mathUtils.sum(2, 3);
-        assertThat(result).isEqualTo(5);
+    @Nested
+    @DisplayName("sum method")
+    class Sum {
+        @Test
+        @DisplayName("should sum two positive numbers when successful")
+        void shouldSumTwoNumbersWithSuccessful() {
+            final int result = mathUtils.sum(2, 3);
+            assertThat(result).isEqualTo(5);
+        }
+
+        @Test
+        @DisplayName("should sum two negative numbers when successful")
+        void shouldSumTwoNegativeNumbersWithSuccessful() {
+            final int result = mathUtils.sum(-2, -3);
+            assertThat(result).isEqualTo(-5);
+        }
     }
 
     @Test
@@ -48,7 +60,7 @@ class MathUtilsTest {
     }
 
     @Test
-    @DisplayName("should multiply two numbers with successful")
+    @DisplayName("should multiply two numbers when successful")
     void shouldMultiplyTwoNumbersWithSuccessful() {
         assertSoftly(
                 softAssertions -> {
