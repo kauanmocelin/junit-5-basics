@@ -53,9 +53,10 @@ class MathUtilsTest {
                 .isInstanceOf(ArithmeticException.class);
     }
 
-    @Test
+    @RepeatedTest(3)
     @DisplayName("should return right circle area when successful")
-    void shouldReturnRightCircleAreaWhenSuccessful() {
+    void shouldReturnRightCircleAreaWhenSuccessful(RepetitionInfo repetitionInfo) {
+//        repetitionInfo.getCurrentRepetition();
         assertThat(mathUtils.calculateCircleArea(10)).isEqualTo(314.1592653589793);
     }
 
