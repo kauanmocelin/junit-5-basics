@@ -30,6 +30,7 @@ class MathUtilsTest {
 
     @Nested
     @DisplayName("sum method")
+    @Tag("Math")
     class Sum {
         @Test
         @DisplayName("should sum two positive numbers when successful")
@@ -47,6 +48,7 @@ class MathUtilsTest {
     }
 
     @Test
+    @Tag("Math")
     @DisplayName("Should return ArithmeticException when divide by zero")
     void shouldReturnArithmeticExceptionWhenDivideByZero() {
         assertThatThrownBy(() -> mathUtils.divide(1, 0))
@@ -54,6 +56,7 @@ class MathUtilsTest {
     }
 
     @RepeatedTest(3)
+    @Tag("Circle")
     @DisplayName("should return right circle area when successful")
     void shouldReturnRightCircleAreaWhenSuccessful(RepetitionInfo repetitionInfo) {
 //        repetitionInfo.getCurrentRepetition();
@@ -61,6 +64,7 @@ class MathUtilsTest {
     }
 
     @Test
+    @Tag("Math")
     @DisplayName("should multiply two numbers when successful")
     void shouldMultiplyTwoNumbersWithSuccessful() {
         assertSoftly(
