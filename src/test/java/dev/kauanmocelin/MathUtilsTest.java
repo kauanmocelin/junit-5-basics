@@ -40,8 +40,15 @@ class MathUtilsTest {
         @Test
         @DisplayName("should sum two positive numbers when successful")
         void shouldSumTwoNumbersWithSuccessful() {
-            final int result = mathUtils.sum(2, 3);
-            assertThat(result).isEqualTo(5);
+            var parameterA = 2;
+            var parameterB = 3;
+            var expectedResult = 5;
+
+            final int result = mathUtils.sum(parameterA, parameterB);
+
+            assertThat(result)
+                .as(() -> String.format("%s + %s did not produce %s", parameterA, parameterB, expectedResult))
+                .isEqualTo(expectedResult);
         }
 
         @Test
