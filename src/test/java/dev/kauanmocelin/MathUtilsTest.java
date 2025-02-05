@@ -20,6 +20,11 @@ class MathUtilsTest {
         System.out.println("This needs to run before all");
     }
 
+    @AfterAll
+    static void afterAllInit() {
+        System.out.println("This needs to run after all");
+    }
+
     @BeforeEach
     void init(TestInfo testInfo, TestReporter testReporter) {
         this.testInfo = testInfo;
@@ -62,10 +67,14 @@ class MathUtilsTest {
 
     @Test
     @Tag("Math")
-    @DisplayName("should return ArithmeticException when divide by zero")
-    void shouldReturnArithmeticExceptionWhenDivideByZero() {
+    @DisplayName("should return ArithmeticException when divided by zero")
+    void shouldReturnArithmeticExceptionWhenDividedByZero() {
         assertThatThrownBy(() -> mathUtils.divide(1, 0))
-                .isInstanceOf(ArithmeticException.class);
+            .as("division by zero should have throw an ArithmeticException")
+            .isInstanceOf(ArithmeticException.class)
+            .as("unexpected exception message")
+            .hasMessage("/ by zero");
+
     }
 
     @RepeatedTest(3)
@@ -83,11 +92,11 @@ class MathUtilsTest {
 //        System.out.println("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
 //        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
         assertSoftly(
-                softAssertions -> {
-                    softAssertions.assertThat(mathUtils.multiply(2, 2)).isEqualTo(4);
-                    softAssertions.assertThat(mathUtils.multiply(2, 0)).isEqualTo(0);
-                    softAssertions.assertThat(mathUtils.multiply(2, -1)).isEqualTo(-2);
-                }
+            softAssertions -> {
+                softAssertions.assertThat(mathUtils.multiply(2, 2)).isEqualTo(4);
+                softAssertions.assertThat(mathUtils.multiply(2, 0)).isEqualTo(0);
+                softAssertions.assertThat(mathUtils.multiply(2, -1)).isEqualTo(-2);
+            }
         );
     }
 
