@@ -38,22 +38,23 @@ class MathUtilsTest {
     @Tag("Math")
     class Sum {
         @Test
-        @DisplayName("should sum two positive numbers when successful")
-        void shouldSumTwoNumbersWithSuccessful() {
+        @DisplayName("should return five when sum two with three")
+        void shouldReturnFiveWhenSumTwoWithThree() {
+            // Arrange
             var parameterA = 2;
             var parameterB = 3;
             var expectedResult = 5;
-
+            // Act
             final int result = mathUtils.sum(parameterA, parameterB);
-
+            // Assert
             assertThat(result)
                 .as(() -> String.format("%s + %s did not produce %s", parameterA, parameterB, expectedResult))
                 .isEqualTo(expectedResult);
         }
 
         @Test
-        @DisplayName("should sum two negative numbers when successful")
-        void shouldSumTwoNegativeNumbersWithSuccessful() {
+        @DisplayName("should return minus five when sum minus two with minus three")
+        void shouldReturnMinusFiveWhenSumMinusTwoWithMinusThree() {
             final int result = mathUtils.sum(-2, -3);
             assertThat(result).isEqualTo(-5);
         }
@@ -61,7 +62,7 @@ class MathUtilsTest {
 
     @Test
     @Tag("Math")
-    @DisplayName("Should return ArithmeticException when divide by zero")
+    @DisplayName("should return ArithmeticException when divide by zero")
     void shouldReturnArithmeticExceptionWhenDivideByZero() {
         assertThatThrownBy(() -> mathUtils.divide(1, 0))
                 .isInstanceOf(ArithmeticException.class);
@@ -69,8 +70,8 @@ class MathUtilsTest {
 
     @RepeatedTest(3)
     @Tag("Circle")
-    @DisplayName("should return right circle area when successful")
-    void shouldReturnRightCircleAreaWhenSuccessful(RepetitionInfo repetitionInfo) {
+    @DisplayName("should return three hundred fourteen when calculate circle area")
+    void shouldReturnThreeHundredFourteenWhenCalculateCircleArea(RepetitionInfo repetitionInfo) {
 //        repetitionInfo.getCurrentRepetition();
         assertThat(mathUtils.calculateCircleArea(10)).isEqualTo(314.1592653589793);
     }
