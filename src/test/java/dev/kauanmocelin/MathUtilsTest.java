@@ -3,6 +3,7 @@ package dev.kauanmocelin;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -62,6 +63,25 @@ class MathUtilsTest {
                 Arguments.of(15,5,20),
                 Arguments.of(50,100,150)
             );
+        }
+    }
+
+    @Nested
+    @DisplayName("subtraction method")
+    @Tag("Math")
+    class Subtraction {
+        @DisplayName("Test integer subtraction [minuend, subtrahend, expectedResult]")
+        @ParameterizedTest
+        @CsvSource({
+            "33, 1, 32",
+            "24, 1, 23",
+            "54, 1, 53"
+        })
+        void integerSubtraction(int minuend, int subtrahend, int expectedResult) {
+            final int result = mathUtils.subtract(minuend, subtrahend);
+            assertThat(result)
+                .as(() -> String.format("%s + %s did not produce %s", minuend, subtrahend, expectedResult))
+                .isEqualTo(expectedResult);
         }
 
         @Test
