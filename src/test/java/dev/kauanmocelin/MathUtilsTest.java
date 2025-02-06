@@ -1,6 +1,11 @@
 package dev.kauanmocelin;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -42,19 +47,21 @@ class MathUtilsTest {
     @DisplayName("sum method")
     @Tag("Math")
     class Sum {
-        @Test
-        @DisplayName("should return five when sum two with three")
-        void shouldReturnFiveWhenSumTwoWithThree() {
-            // Arrange
-            var parameterA = 2;
-            var parameterB = 3;
-            var expectedResult = 5;
-            // Act
-            final int result = mathUtils.sum(parameterA, parameterB);
-            // Assert
+        @DisplayName("Test integer addition [addendA, addendB, expectedResult]")
+        @ParameterizedTest
+        @MethodSource
+        void integerAddition(int addendA, int addendB, int expectedResult) {
+            final int result = mathUtils.sum(addendA, addendB);
             assertThat(result)
-                .as(() -> String.format("%s + %s did not produce %s", parameterA, parameterB, expectedResult))
+                .as(() -> String.format("%s + %s did not produce %s", addendA, addendB, expectedResult))
                 .isEqualTo(expectedResult);
+        }
+        private static Stream<Arguments> integerAddition() {
+            return Stream.of(
+                Arguments.of(2,3,5),
+                Arguments.of(15,5,20),
+                Arguments.of(50,100,150)
+            );
         }
 
         @Test
