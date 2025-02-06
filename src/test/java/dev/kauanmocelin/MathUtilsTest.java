@@ -3,6 +3,7 @@ package dev.kauanmocelin;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -92,16 +93,31 @@ class MathUtilsTest {
         }
     }
 
-    @Test
-    @Tag("Math")
-    @DisplayName("should return ArithmeticException when divided by zero")
-    void shouldReturnArithmeticExceptionWhenDividedByZero() {
-        assertThatThrownBy(() -> mathUtils.divide(1, 0))
-            .as("division by zero should have throw an ArithmeticException")
-            .isInstanceOf(ArithmeticException.class)
-            .as("unexpected exception message")
-            .hasMessage("/ by zero");
 
+    @Nested
+    @DisplayName("division method")
+    @Tag("Math")
+    class Division {
+        @Test
+        @DisplayName("should return ArithmeticException when divided by zero")
+        void shouldReturnArithmeticExceptionWhenDividedByZero() {
+            assertThatThrownBy(() -> mathUtils.divide(1, 0))
+                .as("division by zero should have throw an ArithmeticException")
+                .isInstanceOf(ArithmeticException.class)
+                .as("unexpected exception message")
+                .hasMessage("/ by zero");
+
+        }
+
+        @DisplayName("Test integer division [dividend, divisor, expectedResult]")
+        @ParameterizedTest
+        @CsvFileSource (resources = "/integer-division.csv")
+        void integerSubtraction(int dividend, int divisor, int expectedResult) {
+            final int result = mathUtils.divide(dividend, divisor);
+            assertThat(result)
+                .as(() -> String.format("%s + %s did not produce %s", dividend, divisor, expectedResult))
+                .isEqualTo(expectedResult);
+        }
     }
 
     @RepeatedTest(3)
