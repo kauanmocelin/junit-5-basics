@@ -117,11 +117,12 @@ class MathUtilsTest {
         }
     }
 
-    @RepeatedTest(3)
+    @DisplayName("division by zero")
+    @RepeatedTest(value = 3, name = "{displayName}. Repetition {currentRepetition} of {totalRepetitions}")
     @Tag("Circle")
-    @DisplayName("should return three hundred fourteen when calculate circle area")
-    void shouldReturnThreeHundredFourteenWhenCalculateCircleArea(RepetitionInfo repetitionInfo) {
-//        repetitionInfo.getCurrentRepetition();
+    void shouldReturnThreeHundredFourteenWhenCalculateCircleArea(RepetitionInfo repetitionInfo, TestInfo testInfo) {
+        System.out.println("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
+        System.out.println("Repetition #" + repetitionInfo.getCurrentRepetition() + " of " + repetitionInfo.getTotalRepetitions());
         assertThat(mathUtils.calculateCircleArea(10)).isEqualTo(314.1592653589793);
     }
 
@@ -129,8 +130,6 @@ class MathUtilsTest {
     @Tag("Math")
     @DisplayName("should multiply two numbers when successful")
     void shouldMultiplyTwoNumbersWithSuccessful() {
-//        System.out.println("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
-//        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " + testInfo.getTags());
         assertSoftly(
             softAssertions -> {
                 softAssertions.assertThat(mathUtils.multiply(2, 2)).isEqualTo(4);
